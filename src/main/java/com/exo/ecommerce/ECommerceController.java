@@ -1,6 +1,8 @@
 package com.exo.ecommerce;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,8 +28,7 @@ public class ECommerceController {
     }
 
     @RequestMapping(path = "/add-item", produces = "application/json; charset=UTF-8")
-    @ResponseBody
-    public AddItemResponse addItemToCart(@RequestParam("id") Long id) {
+    public ResponseEntity addItemToCart(@RequestParam("id") Long id) {
         Optional<Item> purchasedItem = itemRepository.findById(id);
 
         if (purchasedItem.isPresent() && purchasedItem.get().getRemainingInStock() > 0) {
@@ -43,32 +44,36 @@ public class ECommerceController {
             item = itemRepository.save(item);
             cart.addItem(item);
             cartRepository.save(cart);
-            return new AddItemResponse("Item " + id + " added successfully to the cart", cart);
+            return ResponseEntity.ok(new AddItemResponse("Item " + id + " added successfully to the cart", cart));
         } else {
-            return new AddItemResponse("Item " + id + " is not available");
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
         }
     }
 
     @RequestMapping(path = "/check-out", produces = "application/json; charset=UTF-8")
-    @ResponseBody
-    public CheckOutCartResponse checkOutCart() {
+    public ResponseEntity checkOutCart() {
         Optional<Cart> currentCart = cartRepository.findTopByCheckedOutOrderByIdDesc(false);
-        if (currentCart.isPresent()) {
+        if (currentCart.isPresent() && !currentCart.get().getItems().isEmpty()) {
             Cart cart = currentCart.get();
             Invoice invoice = new Invoice(cart);
             cart.setCheckedOut(true);
             invoiceRepository.save(invoice);
             cartRepository.save(cart);
-            return new CheckOutCartResponse("Cart checked out successfully", invoice);
+            return ResponseEntity.ok(new CheckOutCartResponse("Cart checked out successfully", invoice));
         } else {
-            return new CheckOutCartResponse("Nothing to check out");
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
         }
     }
 
     @RequestMapping(path = "/cart", produces = "application/json; charset=UTF-8")
     @ResponseBody
     public CartResponse currentCart() {
-        return new CartResponse(cartRepository.findTopByCheckedOutOrderByIdDesc(false).orElse(null));
+        Cart cart = cartRepository.findTopByCheckedOutOrderByIdDesc(false).orElse(null);
+        if (cart != null && !cart.getItems().isEmpty()) {
+            return new CartResponse(cart);
+        } else {
+            return new CartResponse(null);
+        }
     }
 
     @RequestMapping(path = "/invoices", produces = "application/json; charset=UTF-8")
@@ -83,8 +88,12 @@ public class ECommerceController {
     }
 
     @RequestMapping(path = "/invoice", produces = "application/json; charset=UTF-8")
-    @ResponseBody
-    public InvoiceResponse invoice(@RequestParam("id") Long id) {
-        return new InvoiceResponse(invoiceRepository.findById(id).orElse(null));
+    public ResponseEntity invoice(@RequestParam("id") Long id) {
+        Invoice invoice = invoiceRepository.findById(id).orElse(null);
+        if (invoice != null) {
+            return ResponseEntity.ok(new InvoiceResponse(invoice));
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
     }
 }

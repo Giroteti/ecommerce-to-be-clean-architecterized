@@ -1,7 +1,0 @@
-{
-  "cart" : {
-    "cart" : null,
-    "total" : ""
-  },
-  "message" : "Item 1 is not available"
-}

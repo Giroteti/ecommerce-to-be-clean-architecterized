@@ -55,8 +55,6 @@ chmod 755 ./.git/hooks/pre-commit
 
 ## TODO
 
-- Add test : should_display_current_cart
-- Add test : should_check_out_cart
-- Add test : should_list_invoices (+ empty case)
-- Add test : should_display_invoice (+ empty case)
 - Add test : cart repository
+- Extract test helpers
+- Extract currencyFormatter ?

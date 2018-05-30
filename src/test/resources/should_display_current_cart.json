@@ -1,0 +1,32 @@
+{
+  "cart" : {
+    "id" : %s,
+    "items" : [ {
+      "id" : 1,
+      "name" : "item1",
+      "description" : "This is item 1",
+      "remainingInStock" : 0,
+      "price" : 10.0
+    }, {
+      "id" : 1,
+      "name" : "item1",
+      "description" : "This is item 1",
+      "remainingInStock" : 0,
+      "price" : 10.0
+    }, {
+      "id" : 2,
+      "name" : "item2",
+      "description" : "This is item 2",
+      "remainingInStock" : 3,
+      "price" : 20.0
+    }, {
+      "id" : 2,
+      "name" : "item2",
+      "description" : "This is item 2",
+      "remainingInStock" : 3,
+      "price" : 20.0
+    } ],
+    "checkedOut" : false
+  },
+  "total" : "60 €"
+}
