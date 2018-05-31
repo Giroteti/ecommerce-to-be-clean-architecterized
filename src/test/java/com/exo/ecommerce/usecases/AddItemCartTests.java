@@ -20,7 +20,6 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 
 @RunWith(MockitoJUnitRunner.class)
-
 public class AddItemCartTests extends TestCase{
     @Mock
     private ItemRepository itemRepository;
