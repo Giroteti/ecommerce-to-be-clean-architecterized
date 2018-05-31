@@ -20,4 +20,6 @@
         <constructor-arg index="1" ref="xmlMySQLCartRepository"/>
     </bean>
 
+    <bean id="xmlAddItemPresenter" class="com.exo.ecommerce.infrastructure.AddItemPresenter"/>
+
 </beans>

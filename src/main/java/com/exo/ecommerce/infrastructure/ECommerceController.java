@@ -21,6 +21,8 @@ public class ECommerceController {
     @Autowired
     AddItemToCart addItemToCart;
     @Autowired
+    AddItemPresenter addItemPresenter;
+    @Autowired
     ItemCRUDRepository itemRepository;
     @Autowired
     CartCRUDRepository cartRepository;
@@ -34,15 +36,8 @@ public class ECommerceController {
     }
 
     @RequestMapping(path = "/add-item", produces = "application/json; charset=UTF-8")
-    public ResponseEntity addItemToCart(@RequestParam("id") Long id) {
-
-        Cart cart = addItemToCart.handle(id);
-
-        if (cart != null) {
-            return ResponseEntity.ok(new AddItemResponse("Item " + id + " added successfully to the cart", cart));
-        } else {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
-        }
+    public ResponseEntity addItemToCart(@RequestParam("id") Long itemId) {
+        return addItemPresenter.present(addItemToCart.handle(itemId), itemId);
     }
 
     @RequestMapping(path = "/check-out", produces = "application/json; charset=UTF-8")
