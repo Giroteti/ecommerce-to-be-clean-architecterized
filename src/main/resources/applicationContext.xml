@@ -8,41 +8,41 @@
         http://www.springframework.org/schema/context/spring-context.xsd">
 
     <bean id="xmlMySQLItemRepository" class="com.exo.ecommerce.infrastructure.MySQLItemRepository">
-        <constructor-arg index="0" ref="itemCRUDRepository"/>
+        <constructor-arg name="crudRepository" ref="itemCRUDRepository"/>
     </bean>
 
     <bean id="xmlMySQLCartRepository" class="com.exo.ecommerce.infrastructure.MySQLCartRepository">
-        <constructor-arg index="0" ref="cartCRUDRepository"/>
+        <constructor-arg name="crudRepository" ref="cartCRUDRepository"/>
     </bean>
 
     <bean id="xmlMySQLInvoiceRepository" class="com.exo.ecommerce.infrastructure.MySQLInvoiceRepository">
-        <constructor-arg index="0" ref="invoiceCRUDRepository"/>
+        <constructor-arg name="crudRepository" ref="invoiceCRUDRepository"/>
     </bean>
 
     <bean id="xmlAddItemToCart" class="com.exo.ecommerce.usecases.AddItemToCart">
-        <constructor-arg index="0" ref="xmlMySQLItemRepository"/>
-        <constructor-arg index="1" ref="xmlMySQLCartRepository"/>
+        <constructor-arg name="itemRepository" ref="xmlMySQLItemRepository"/>
+        <constructor-arg name="cartRepository" ref="xmlMySQLCartRepository"/>
     </bean>
 
     <bean id="xmlCheckOut" class="com.exo.ecommerce.usecases.CheckOut">
-        <constructor-arg index="0" ref="xmlMySQLCartRepository"/>
-        <constructor-arg index="1" ref="xmlMySQLInvoiceRepository"/>
+        <constructor-arg name="cartRepository" ref="xmlMySQLCartRepository"/>
+        <constructor-arg name="invoiceRepository" ref="xmlMySQLInvoiceRepository"/>
     </bean>
 
     <bean id="xmlGetCurrentCart" class="com.exo.ecommerce.usecases.GetCurrentCart">
-        <constructor-arg index="0" ref="xmlMySQLCartRepository"/>
+        <constructor-arg name="cartRepository" ref="xmlMySQLCartRepository"/>
     </bean>
 
     <bean id="xmlGetAllInvoices" class="com.exo.ecommerce.usecases.GetAllInvoices">
-        <constructor-arg index="0" ref="xmlMySQLInvoiceRepository"/>
+        <constructor-arg name="invoiceRepository" ref="xmlMySQLInvoiceRepository"/>
     </bean>
 
     <bean id="xmlGetInvoice" class="com.exo.ecommerce.usecases.GetInvoice">
-        <constructor-arg index="0" ref="xmlMySQLInvoiceRepository"/>
+        <constructor-arg name="invoiceRepository" ref="xmlMySQLInvoiceRepository"/>
     </bean>
 
     <bean id="xmlGetAllItems" class="com.exo.ecommerce.usecases.GetAllItems">
-        <constructor-arg index="0" ref="xmlMySQLItemRepository"/>
+        <constructor-arg name="itemRepository" ref="xmlMySQLItemRepository"/>
     </bean>
 
 
