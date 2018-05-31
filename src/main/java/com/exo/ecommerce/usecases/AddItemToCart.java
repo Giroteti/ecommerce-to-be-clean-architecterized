@@ -2,8 +2,8 @@ package com.exo.ecommerce.usecases;
 
 import com.exo.ecommerce.domain.Cart;
 import com.exo.ecommerce.domain.Item;
+import com.exo.ecommerce.domain.ItemRepository;
 import com.exo.ecommerce.infrastructure.CartRepository;
-import com.exo.ecommerce.infrastructure.ItemRepository;
 
 import java.util.Optional;
 

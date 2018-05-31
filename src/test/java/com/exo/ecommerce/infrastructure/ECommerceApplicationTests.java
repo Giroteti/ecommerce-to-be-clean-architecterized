@@ -4,9 +4,6 @@ import com.exo.ecommerce.SlowTests;
 import com.exo.ecommerce.domain.Cart;
 import com.exo.ecommerce.domain.Invoice;
 import com.exo.ecommerce.domain.Item;
-import com.exo.ecommerce.infrastructure.CartRepository;
-import com.exo.ecommerce.infrastructure.InvoiceRepository;
-import com.exo.ecommerce.infrastructure.ItemRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
@@ -41,7 +38,7 @@ import static org.junit.Assert.assertNull;
 public class ECommerceApplicationTests {
 
     @Autowired
-    private ItemRepository itemRepository;
+    private ItemCRUDRepository itemRepository;
     @Autowired
     private CartRepository cartRepository;
     @Autowired
