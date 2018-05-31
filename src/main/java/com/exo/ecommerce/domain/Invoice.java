@@ -1,16 +1,11 @@
-package com.exo.ecommerce;
+package com.exo.ecommerce.domain;
 
-import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-@Entity
 public class Invoice {
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
     private String date;
-    @OneToOne
     private Cart cart;
 
     public Invoice() {
@@ -36,5 +31,17 @@ public class Invoice {
     public float calculateTotalPrice()
     {
         return this.cart.calculateTotalPrice();
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
     }
 }

@@ -1,5 +1,7 @@
 package com.exo.ecommerce;
 
+import com.exo.ecommerce.domain.Cart;
+
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.Currency;
