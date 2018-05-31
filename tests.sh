@@ -7,12 +7,12 @@ while getopts "uih" option; do
     case "${option}" in
         u)
             ./mvnw clean
-            ./mvnw test -Dgroups="com.example.fabrikam.TodoDemo.FastTests" -e
+            ./mvnw test -Dgroups="com.exo.ecommerce.FastTests" -e
             exit 0
             ;;
         i)
             ./mvnw clean
-            ./mvnw test -Dgroups="com.example.fabrikam.TodoDemo.SlowTests" -e
+            ./mvnw test -Dgroups="com.exo.ecommerce.SlowTests" -e
             exit 0
             ;;
         h)
