@@ -1,4 +1,4 @@
-package com.exo.ecommerce;
+package com.exo.ecommerce.infrastructure;
 
 import com.exo.ecommerce.domain.Item;
 import org.springframework.data.repository.CrudRepository;

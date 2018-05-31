@@ -1,8 +1,9 @@
-package com.exo.ecommerce;
+package com.exo.ecommerce.infrastructure;
 
 import com.exo.ecommerce.domain.Cart;
 import com.exo.ecommerce.domain.Invoice;
 import com.exo.ecommerce.domain.Item;
+import com.exo.ecommerce.usecases.AddItemToCart;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,21 +33,10 @@ public class ECommerceController {
 
     @RequestMapping(path = "/add-item", produces = "application/json; charset=UTF-8")
     public ResponseEntity addItemToCart(@RequestParam("id") Long id) {
-        Optional<Item> purchasedItem = itemRepository.findById(id);
+        AddItemToCart addItemToCart = new AddItemToCart(itemRepository, cartRepository);
+        Cart cart = addItemToCart.handle(id);
 
-        if (purchasedItem.isPresent() && purchasedItem.get().getRemainingInStock() > 0) {
-            Item item = purchasedItem.get();
-            Optional<Cart> currentCart = cartRepository.findTopByCheckedOutOrderByIdDesc(false);
-            Cart cart = null;
-            if (currentCart.isPresent()) {
-                cart = currentCart.get();
-            } else {
-                cart = new Cart();
-            }
-            item.decrementRemainingInStock();
-            item = itemRepository.save(item);
-            cart.addItem(item);
-            cartRepository.save(cart);
+        if (cart != null) {
             return ResponseEntity.ok(new AddItemResponse("Item " + id + " added successfully to the cart", cart));
         } else {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
