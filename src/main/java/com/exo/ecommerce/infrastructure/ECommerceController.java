@@ -21,7 +21,7 @@ public class ECommerceController {
     @Autowired
     ItemCRUDRepository itemRepository;
     @Autowired
-    CartRepository cartRepository;
+    CartCRUDRepository cartRepository;
     @Autowired
     InvoiceRepository invoiceRepository;
 
@@ -35,7 +35,7 @@ public class ECommerceController {
     public ResponseEntity addItemToCart(@RequestParam("id") Long id) {
         AddItemToCart addItemToCart = new AddItemToCart(
                 new MySQLItemRepository(itemRepository),
-                cartRepository
+                new MySQLCartRepository(cartRepository)
         );
         Cart cart = addItemToCart.handle(id);
 

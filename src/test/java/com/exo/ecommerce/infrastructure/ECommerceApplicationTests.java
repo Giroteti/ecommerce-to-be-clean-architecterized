@@ -40,7 +40,7 @@ public class ECommerceApplicationTests {
     @Autowired
     private ItemCRUDRepository itemRepository;
     @Autowired
-    private CartRepository cartRepository;
+    private CartCRUDRepository cartRepository;
     @Autowired
     private InvoiceRepository invoiceRepository;
 
