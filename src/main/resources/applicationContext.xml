@@ -30,5 +30,6 @@
     </bean>
 
     <bean id="xmlAddItemPresenter" class="com.exo.ecommerce.infrastructure.AddItemPresenter"/>
+    <bean id="xmlCheckOutPresenter" class="com.exo.ecommerce.infrastructure.CheckOutPresenter"/>
 
 </beans>

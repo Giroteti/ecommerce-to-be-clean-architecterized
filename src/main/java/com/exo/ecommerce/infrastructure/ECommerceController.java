@@ -24,7 +24,9 @@ public class ECommerceController {
     AddItemPresenter addItemPresenter;
     @Autowired
     CheckOut checkOut;
-    
+    @Autowired
+    CheckOutPresenter checkOutPresenter;
+
     @Autowired
     ItemCRUDRepository itemRepository;
     @Autowired
@@ -46,13 +48,7 @@ public class ECommerceController {
     @RequestMapping(path = "/check-out", produces = "application/json; charset=UTF-8")
     public ResponseEntity checkOutCart() {
 
-        Invoice invoice = checkOut.handle();
-
-        if (invoice != null) {
-            return ResponseEntity.ok(new CheckOutCartResponse("Cart checked out successfully", invoice));
-        } else {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
-        }
+        return checkOutPresenter.present(checkOut.handle());
     }
 
     @RequestMapping(path = "/cart", produces = "application/json; charset=UTF-8")
