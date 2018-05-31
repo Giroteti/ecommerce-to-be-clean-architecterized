@@ -29,7 +29,28 @@
         <constructor-arg index="1" ref="xmlMySQLInvoiceRepository"/>
     </bean>
 
+    <bean id="xmlGetCurrentCart" class="com.exo.ecommerce.usecases.GetCurrentCart">
+        <constructor-arg index="0" ref="xmlMySQLCartRepository"/>
+    </bean>
+
+    <bean id="xmlGetAllInvoices" class="com.exo.ecommerce.usecases.GetAllInvoices">
+        <constructor-arg index="0" ref="xmlMySQLInvoiceRepository"/>
+    </bean>
+
+    <bean id="xmlGetInvoice" class="com.exo.ecommerce.usecases.GetInvoice">
+        <constructor-arg index="0" ref="xmlMySQLInvoiceRepository"/>
+    </bean>
+
+    <bean id="xmlGetAllItems" class="com.exo.ecommerce.usecases.GetAllItems">
+        <constructor-arg index="0" ref="xmlMySQLItemRepository"/>
+    </bean>
+
+
     <bean id="xmlAddItemPresenter" class="com.exo.ecommerce.infrastructure.AddItemPresenter"/>
     <bean id="xmlCheckOutPresenter" class="com.exo.ecommerce.infrastructure.CheckOutPresenter"/>
+    <bean id="xmlCurrentCartPresenter" class="com.exo.ecommerce.infrastructure.CurrentCartPresenter"/>
+    <bean id="xmlInvoicesPresenter" class="com.exo.ecommerce.infrastructure.InvoicesPresenter"/>
+    <bean id="xmlInvoicePresenter" class="com.exo.ecommerce.infrastructure.InvoicePresenter"/>
+    <bean id="xmlItemsPresenter" class="com.exo.ecommerce.infrastructure.ItemsPresenter"/>
 
 </beans>

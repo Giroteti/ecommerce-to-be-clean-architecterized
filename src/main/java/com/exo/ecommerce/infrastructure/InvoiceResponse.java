@@ -14,14 +14,7 @@ public class InvoiceResponse {
     public InvoiceResponse(Invoice invoice) {
         this.invoice = invoice;
         if (invoice != null) {
-            DecimalFormat numberFormat = (DecimalFormat) DecimalFormat.getCurrencyInstance(Locale.FRANCE);
-            numberFormat.applyPattern("###,###.## ¤");
-            DecimalFormatSymbols symbols = numberFormat.getDecimalFormatSymbols();
-            symbols.setDecimalSeparator(',');
-            symbols.setGroupingSeparator(' ');
-            symbols.setCurrency(Currency.getInstance("EUR"));
-            numberFormat.setDecimalFormatSymbols(symbols);
-            this.total = numberFormat.format(invoice.calculateTotalPrice());
+            this.total = CurrencyFormatter.formatCurrency(invoice.calculateTotalPrice());
         } else {
             this.total= "";
         }

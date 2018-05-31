@@ -1,8 +1,10 @@
 package com.exo.ecommerce.usecases;
 
+import com.exo.ecommerce.FastTests;
 import com.exo.ecommerce.domain.*;
 import junit.framework.TestCase;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
@@ -24,6 +26,7 @@ public class CheckOutTests extends TestCase {
     private CheckOut underTest;
 
     @Test
+    @Category(FastTests.class)
     public void should_check_out_existing_non_empty_cart() {
         // given
         Cart returnedCart = new Cart();
@@ -47,6 +50,7 @@ public class CheckOutTests extends TestCase {
     }
 
     @Test
+    @Category(FastTests.class)
     public void should_not_check_out_empty_cart()
     {
         // given
@@ -61,6 +65,7 @@ public class CheckOutTests extends TestCase {
     }
 
     @Test
+    @Category(FastTests.class)
     public void should_not_check_out_uninitialized_cart()
     {
         // given
