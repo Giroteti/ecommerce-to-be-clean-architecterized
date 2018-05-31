@@ -19,6 +19,8 @@ import java.util.Optional;
 public class ECommerceController {
 
     @Autowired
+    AddItemToCart addItemToCart;
+    @Autowired
     ItemCRUDRepository itemRepository;
     @Autowired
     CartCRUDRepository cartRepository;
@@ -33,10 +35,7 @@ public class ECommerceController {
 
     @RequestMapping(path = "/add-item", produces = "application/json; charset=UTF-8")
     public ResponseEntity addItemToCart(@RequestParam("id") Long id) {
-        AddItemToCart addItemToCart = new AddItemToCart(
-                new MySQLItemRepository(itemRepository),
-                new MySQLCartRepository(cartRepository)
-        );
+
         Cart cart = addItemToCart.handle(id);
 
         if (cart != null) {
