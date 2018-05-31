@@ -15,9 +15,18 @@
         <constructor-arg index="0" ref="cartCRUDRepository"/>
     </bean>
 
+    <bean id="xmlMySQLInvoiceRepository" class="com.exo.ecommerce.infrastructure.MySQLInvoiceRepository">
+        <constructor-arg index="0" ref="invoiceCRUDRepository"/>
+    </bean>
+
     <bean id="xmlAddItemToCart" class="com.exo.ecommerce.usecases.AddItemToCart">
         <constructor-arg index="0" ref="xmlMySQLItemRepository"/>
         <constructor-arg index="1" ref="xmlMySQLCartRepository"/>
+    </bean>
+
+    <bean id="xmlCheckOut" class="com.exo.ecommerce.usecases.CheckOut">
+        <constructor-arg index="0" ref="xmlMySQLCartRepository"/>
+        <constructor-arg index="1" ref="xmlMySQLInvoiceRepository"/>
     </bean>
 
     <bean id="xmlAddItemPresenter" class="com.exo.ecommerce.infrastructure.AddItemPresenter"/>

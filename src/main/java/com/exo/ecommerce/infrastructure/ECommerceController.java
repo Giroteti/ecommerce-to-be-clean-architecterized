@@ -23,6 +23,9 @@ public class ECommerceController {
     @Autowired
     AddItemPresenter addItemPresenter;
     @Autowired
+    CheckOut checkOut;
+    
+    @Autowired
     ItemCRUDRepository itemRepository;
     @Autowired
     CartCRUDRepository cartRepository;
@@ -43,7 +46,6 @@ public class ECommerceController {
     @RequestMapping(path = "/check-out", produces = "application/json; charset=UTF-8")
     public ResponseEntity checkOutCart() {
 
-        CheckOut checkOut = new CheckOut(new MySQLCartRepository(cartRepository), new MySQLInvoiceRepository(invoiceRepository));
         Invoice invoice = checkOut.handle();
 
         if (invoice != null) {
