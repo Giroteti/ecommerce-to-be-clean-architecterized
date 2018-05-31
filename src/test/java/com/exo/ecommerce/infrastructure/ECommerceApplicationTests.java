@@ -42,7 +42,7 @@ public class ECommerceApplicationTests {
     @Autowired
     private CartCRUDRepository cartRepository;
     @Autowired
-    private InvoiceRepository invoiceRepository;
+    private InvoiceCRUDRepository invoiceRepository;
 
     @Autowired
     private TestRestTemplate restTemplate;

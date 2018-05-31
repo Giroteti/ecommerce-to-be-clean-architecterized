@@ -4,6 +4,7 @@ import com.exo.ecommerce.domain.Cart;
 import com.exo.ecommerce.domain.Invoice;
 import com.exo.ecommerce.domain.Item;
 import com.exo.ecommerce.usecases.AddItemToCart;
+import com.exo.ecommerce.usecases.CheckOut;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
-import java.util.Optional;
 
 @Controller
 public class ECommerceController {
@@ -27,7 +27,7 @@ public class ECommerceController {
     @Autowired
     CartCRUDRepository cartRepository;
     @Autowired
-    InvoiceRepository invoiceRepository;
+    InvoiceCRUDRepository invoiceRepository;
 
     @RequestMapping(path = "/items", produces = "application/json; charset=UTF-8")
     @ResponseBody
@@ -42,13 +42,11 @@ public class ECommerceController {
 
     @RequestMapping(path = "/check-out", produces = "application/json; charset=UTF-8")
     public ResponseEntity checkOutCart() {
-        Optional<Cart> currentCart = cartRepository.findTopByCheckedOutOrderByIdDesc(false);
-        if (currentCart.isPresent() && !currentCart.get().getItems().isEmpty()) {
-            Cart cart = currentCart.get();
-            Invoice invoice = new Invoice(cart);
-            cart.setCheckedOut(true);
-            invoiceRepository.save(invoice);
-            cartRepository.save(cart);
+
+        CheckOut checkOut = new CheckOut(new MySQLCartRepository(cartRepository), new MySQLInvoiceRepository(invoiceRepository));
+        Invoice invoice = checkOut.handle();
+
+        if (invoice != null) {
             return ResponseEntity.ok(new CheckOutCartResponse("Cart checked out successfully", invoice));
         } else {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
