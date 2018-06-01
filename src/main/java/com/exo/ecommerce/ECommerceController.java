@@ -1,5 +1,8 @@
 package com.exo.ecommerce;
 
+import com.exo.ecommerce.domain.Cart;
+import com.exo.ecommerce.domain.Invoice;
+import com.exo.ecommerce.domain.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

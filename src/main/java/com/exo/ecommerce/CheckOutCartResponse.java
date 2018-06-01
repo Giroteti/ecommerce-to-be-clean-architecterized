@@ -1,5 +1,7 @@
 package com.exo.ecommerce;
 
+import com.exo.ecommerce.domain.Invoice;
+
 public class CheckOutCartResponse {
     private String message;
     private Invoice invoice;

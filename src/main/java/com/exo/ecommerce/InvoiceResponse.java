@@ -1,8 +1,9 @@
 package com.exo.ecommerce;
 
+import com.exo.ecommerce.domain.Invoice;
+
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
-import java.text.NumberFormat;
 import java.util.Currency;
 import java.util.Locale;
 

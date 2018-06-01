@@ -1,8 +1,10 @@
 package com.exo.ecommerce;
 
+import com.exo.ecommerce.domain.Cart;
+import com.exo.ecommerce.domain.Invoice;
+import com.exo.ecommerce.domain.Item;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;

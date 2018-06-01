@@ -1,13 +1,7 @@
-package com.exo.ecommerce;
+package com.exo.ecommerce.domain;
 
-import javax.persistence.Id;
-
-import javax.persistence.Entity;
-
-@Entity
 public class Item {
 
-    @Id
     private Long id;
     private String name;
     private String description;
