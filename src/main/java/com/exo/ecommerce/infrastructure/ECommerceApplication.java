@@ -1,4 +1,4 @@
-package com.exo.ecommerce;
+package com.exo.ecommerce.infrastructure;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,8 +1,12 @@
-package com.exo.ecommerce;
+package com.exo.ecommerce.infrastructure;
 
+import com.exo.ecommerce.SlowTests;
 import com.exo.ecommerce.domain.Cart;
 import com.exo.ecommerce.domain.Invoice;
 import com.exo.ecommerce.domain.Item;
+import com.exo.ecommerce.infrastructure.CartRepository;
+import com.exo.ecommerce.infrastructure.InvoiceRepository;
+import com.exo.ecommerce.infrastructure.ItemRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
 import org.junit.Test;
