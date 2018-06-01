@@ -19,11 +19,14 @@ import java.util.Optional;
 public class ECommerceController {
 
     @Autowired
-    ItemRepository itemRepository;
+    AddItemToCart addItemToCart;
+
     @Autowired
-    CartRepository cartRepository;
+    ItemCRUDRepository itemRepository;
     @Autowired
-    InvoiceRepository invoiceRepository;
+    CartCRUDRepository cartRepository;
+    @Autowired
+    InvoiceCRUDRepository invoiceRepository;
 
     @RequestMapping(path = "/items", produces = "application/json; charset=UTF-8")
     @ResponseBody
@@ -32,11 +35,10 @@ public class ECommerceController {
     }
 
     @RequestMapping(path = "/add-item", produces = "application/json; charset=UTF-8")
-    public ResponseEntity addItemToCart(@RequestParam("id") Long id) {
-        AddItemToCart addItemToCart = new AddItemToCart(itemRepository, cartRepository);
-        Cart cart = addItemToCart.handle(id);
+    public ResponseEntity addItemToCart(@RequestParam("id") Long itemId) {
+        Cart cart = addItemToCart.handle(itemId);
         if (cart != null) {
-            return ResponseEntity.ok(new AddItemResponse("Item " + id + " added successfully to the cart", cart));
+            return ResponseEntity.ok(new AddItemResponse("Item " + itemId + " added successfully to the cart", cart));
         } else {
             return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);
         }
