@@ -41,7 +41,7 @@ public class AddItemCartTests extends TestCase{
                         returnedItem
                 )
         );
-        given(cartRepository.findTopByCheckedOutOrderByIdDesc(false)).willReturn(Optional.of(returnedCart));
+        given(cartRepository.fetchCurrentCart()).willReturn(Optional.of(returnedCart));
         given(itemRepository.save(returnedItem)).willReturn(returnedItem);
         // when
         Cart outputCart = underTest.handle(itemId);

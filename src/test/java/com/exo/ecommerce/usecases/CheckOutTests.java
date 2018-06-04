@@ -33,7 +33,7 @@ public class CheckOutTests extends TestCase {
         Item itemToCheckOut = new Item(1L, "Item 1", "Desc 1", 1, (float) 10.0);
         returnedCart.addItem(itemToCheckOut);
         returnedCart.addItem(itemToCheckOut);
-        given(cartRepository.findTopByCheckedOutOrderByIdDesc(false)).willReturn(Optional.of(returnedCart));
+        given(cartRepository.fetchCurrentCart()).willReturn(Optional.of(returnedCart));
 
         // when
         Invoice output = underTest.handle();
@@ -55,7 +55,7 @@ public class CheckOutTests extends TestCase {
     {
         // given
         Cart returnedCart = new Cart();
-        given(cartRepository.findTopByCheckedOutOrderByIdDesc(false)).willReturn(Optional.of(returnedCart));
+        given(cartRepository.fetchCurrentCart()).willReturn(Optional.of(returnedCart));
 
         // when
         Invoice output = underTest.handle();
@@ -69,7 +69,7 @@ public class CheckOutTests extends TestCase {
     public void should_not_check_out_uninitialized_cart()
     {
         // given
-        given(cartRepository.findTopByCheckedOutOrderByIdDesc(false)).willReturn(Optional.empty());
+        given(cartRepository.fetchCurrentCart()).willReturn(Optional.empty());
 
         // when
         Invoice output = underTest.handle();

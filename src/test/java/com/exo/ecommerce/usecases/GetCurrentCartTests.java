@@ -28,7 +28,7 @@ public class GetCurrentCartTests extends TestCase {
         // given
         Cart returnedCart = new Cart();
         given(
-                cartRepository.findTopByCheckedOutOrderByIdDesc(false)
+                cartRepository.fetchCurrentCart()
         ).willReturn(Optional.of(returnedCart));
 
         // when
@@ -42,7 +42,7 @@ public class GetCurrentCartTests extends TestCase {
     @Category(FastTests.class)
     public void should_return_null_no_cart() {
         given(
-                cartRepository.findTopByCheckedOutOrderByIdDesc(false)
+                cartRepository.fetchCurrentCart()
         ).willReturn(Optional.empty());
 
         // when

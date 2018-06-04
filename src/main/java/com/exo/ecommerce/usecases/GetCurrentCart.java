@@ -11,6 +11,6 @@ public class GetCurrentCart {
     }
 
     public Cart handle() {
-        return cartRepository.findTopByCheckedOutOrderByIdDesc(false).orElse(null);
+        return cartRepository.fetchCurrentCart().orElse(null);
     }
 }

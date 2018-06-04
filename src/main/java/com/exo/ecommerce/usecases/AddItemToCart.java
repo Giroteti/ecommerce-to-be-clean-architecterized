@@ -22,7 +22,7 @@ public class AddItemToCart {
 
         if (purchasedItem.isPresent() && purchasedItem.get().getRemainingInStock() > 0) {
             Item item = purchasedItem.get();
-            Optional<Cart> currentCart = cartRepository.findTopByCheckedOutOrderByIdDesc(false);
+            Optional<Cart> currentCart = cartRepository.fetchCurrentCart();
             Cart cart = null;
             if (currentCart.isPresent()) {
                 cart = currentCart.get();

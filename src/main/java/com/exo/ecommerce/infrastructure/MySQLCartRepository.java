@@ -14,8 +14,8 @@ public class MySQLCartRepository implements CartRepository {
     }
 
     @Override
-    public Optional<Cart> findTopByCheckedOutOrderByIdDesc(boolean isCheckedOut) {
-        return this.crudRepository.findTopByCheckedOutOrderByIdDesc(isCheckedOut);
+    public Optional<Cart> fetchCurrentCart() {
+        return this.crudRepository.findTopByCheckedOutOrderByIdDesc(false);
     }
 
     @Override

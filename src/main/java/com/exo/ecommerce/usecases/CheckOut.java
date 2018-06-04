@@ -19,7 +19,7 @@ public class CheckOut {
 
     public Invoice handle()
     {
-        Optional<Cart> currentCart = cartRepository.findTopByCheckedOutOrderByIdDesc(false);
+        Optional<Cart> currentCart = cartRepository.fetchCurrentCart();
         if (currentCart.isPresent() && !currentCart.get().getItems().isEmpty()) {
             Cart cart = currentCart.get();
             Invoice invoice = new Invoice(cart);
