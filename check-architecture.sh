@@ -163,7 +163,7 @@ checkLine() {
 checkDirectory() {
     regexAuthorizedForDirectory=$2
     isCleanArchi=1
-    for file in $(find $1 -name "*.java")
+    for file in $(find $1 -name ${fileFilter})
     do
         infoToConsole "Checking file \"$file\"" 1
         isFileCleanArchi=1
