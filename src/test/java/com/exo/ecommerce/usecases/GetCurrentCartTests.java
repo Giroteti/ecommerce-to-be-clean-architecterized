@@ -1,8 +1,8 @@
 package com.exo.ecommerce.usecases;
 
 import com.exo.ecommerce.FastTests;
-import com.exo.ecommerce.domain.Cart;
-import com.exo.ecommerce.domain.CartRepository;
+import com.exo.ecommerce.domain.cart.Cart;
+import com.exo.ecommerce.domain.cart.CartRepository;
 import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;

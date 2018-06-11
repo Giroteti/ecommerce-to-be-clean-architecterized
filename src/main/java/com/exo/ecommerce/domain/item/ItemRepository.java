@@ -1,4 +1,4 @@
-package com.exo.ecommerce.domain;
+package com.exo.ecommerce.domain.item;
 
 import java.util.List;
 import java.util.Optional;

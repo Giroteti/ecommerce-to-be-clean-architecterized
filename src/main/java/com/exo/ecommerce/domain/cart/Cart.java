@@ -1,4 +1,6 @@
-package com.exo.ecommerce.domain;
+package com.exo.ecommerce.domain.cart;
+
+import com.exo.ecommerce.domain.item.Item;
 
 import java.util.ArrayList;
 import java.util.List;

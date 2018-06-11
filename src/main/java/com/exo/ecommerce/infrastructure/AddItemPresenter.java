@@ -1,6 +1,6 @@
 package com.exo.ecommerce.infrastructure;
 
-import com.exo.ecommerce.domain.Cart;
+import com.exo.ecommerce.domain.cart.Cart;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 

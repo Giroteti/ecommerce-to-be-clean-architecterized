@@ -1,4 +1,6 @@
-package com.exo.ecommerce.domain;
+package com.exo.ecommerce.domain.invoice;
+
+import com.exo.ecommerce.domain.cart.Cart;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

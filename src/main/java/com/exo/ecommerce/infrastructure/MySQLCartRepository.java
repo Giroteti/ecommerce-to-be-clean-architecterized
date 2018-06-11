@@ -1,7 +1,7 @@
 package com.exo.ecommerce.infrastructure;
 
-import com.exo.ecommerce.domain.Cart;
-import com.exo.ecommerce.domain.CartRepository;
+import com.exo.ecommerce.domain.cart.Cart;
+import com.exo.ecommerce.domain.cart.CartRepository;
 
 import java.util.Optional;
 

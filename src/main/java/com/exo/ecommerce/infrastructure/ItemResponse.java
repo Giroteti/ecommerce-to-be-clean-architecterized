@@ -1,7 +1,6 @@
 package com.exo.ecommerce.infrastructure;
 
-import com.exo.ecommerce.domain.Cart;
-import com.exo.ecommerce.domain.Item;
+import com.exo.ecommerce.domain.item.Item;
 
 public class ItemResponse {
     private Long id;

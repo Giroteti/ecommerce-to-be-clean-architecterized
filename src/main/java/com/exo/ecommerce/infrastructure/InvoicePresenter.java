@@ -1,6 +1,6 @@
 package com.exo.ecommerce.infrastructure;
 
-import com.exo.ecommerce.domain.Invoice;
+import com.exo.ecommerce.domain.invoice.Invoice;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 

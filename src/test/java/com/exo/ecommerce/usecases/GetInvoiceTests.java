@@ -1,9 +1,8 @@
 package com.exo.ecommerce.usecases;
 
 import com.exo.ecommerce.FastTests;
-import com.exo.ecommerce.domain.Invoice;
-import com.exo.ecommerce.domain.InvoiceRepository;
-import com.exo.ecommerce.domain.ItemRepository;
+import com.exo.ecommerce.domain.invoice.Invoice;
+import com.exo.ecommerce.domain.invoice.InvoiceRepository;
 import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
@@ -12,7 +11,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.ArrayList;
 import java.util.Optional;
 
 import static org.mockito.BDDMockito.given;

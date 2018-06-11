@@ -43,7 +43,7 @@ sourceDir="./src/main/java/com/exo/ecommerce"
 domainDir=${sourceDir}"/domain"
 useCasesDir=${sourceDir}"/usecases"
 sourcePackageForRegex="com\.exo\.ecommerce"
-files=${domainDir}"/*.java"
+fileFilter="*.java"
 
 # ###################################################
 
@@ -161,10 +161,9 @@ checkLine() {
 }
 
 checkDirectory() {
-    files=$1"/*.java"
     regexAuthorizedForDirectory=$2
     isCleanArchi=1
-    for file in ${files}
+    for file in $(find $1 -name "*.java")
     do
         infoToConsole "Checking file \"$file\"" 1
         isFileCleanArchi=1

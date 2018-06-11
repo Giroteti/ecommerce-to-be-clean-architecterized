@@ -1,6 +1,6 @@
 package com.exo.ecommerce.infrastructure;
 
-import com.exo.ecommerce.domain.Item;
+import com.exo.ecommerce.domain.item.Item;
 
 import java.util.ArrayList;
 import java.util.List;

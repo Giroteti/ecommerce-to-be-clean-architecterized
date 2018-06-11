@@ -1,7 +1,7 @@
 package com.exo.ecommerce.usecases;
 
-import com.exo.ecommerce.domain.Invoice;
-import com.exo.ecommerce.domain.InvoiceRepository;
+import com.exo.ecommerce.domain.invoice.Invoice;
+import com.exo.ecommerce.domain.invoice.InvoiceRepository;
 
 public class GetInvoice {
     private InvoiceRepository invoiceRepository;

@@ -1,9 +1,8 @@
 package com.exo.ecommerce.usecases;
 
-import com.exo.ecommerce.domain.Item;
-import com.exo.ecommerce.domain.ItemRepository;
+import com.exo.ecommerce.domain.item.Item;
+import com.exo.ecommerce.domain.item.ItemRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class GetAllItems {

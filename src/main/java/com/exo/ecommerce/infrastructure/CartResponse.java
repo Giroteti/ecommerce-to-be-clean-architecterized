@@ -1,11 +1,6 @@
 package com.exo.ecommerce.infrastructure;
 
-import com.exo.ecommerce.domain.Cart;
-
-import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
-import java.util.Currency;
-import java.util.Locale;
+import com.exo.ecommerce.domain.cart.Cart;
 
 public class CartResponse {
 

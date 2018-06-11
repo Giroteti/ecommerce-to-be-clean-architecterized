@@ -1,11 +1,12 @@
 package com.exo.ecommerce.infrastructure;
 
-import com.exo.ecommerce.domain.Item;
+import com.exo.ecommerce.domain.item.Item;
+import com.exo.ecommerce.domain.item.ItemRepository;
 
 import java.util.List;
 import java.util.Optional;
 
-public class MySQLItemRepository implements com.exo.ecommerce.domain.ItemRepository {
+public class MySQLItemRepository implements ItemRepository {
 
     ItemCRUDRepository crudRepository;
 

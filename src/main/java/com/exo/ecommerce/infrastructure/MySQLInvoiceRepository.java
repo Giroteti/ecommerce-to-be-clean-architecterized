@@ -1,7 +1,7 @@
 package com.exo.ecommerce.infrastructure;
 
-import com.exo.ecommerce.domain.Invoice;
-import com.exo.ecommerce.domain.InvoiceRepository;
+import com.exo.ecommerce.domain.invoice.Invoice;
+import com.exo.ecommerce.domain.invoice.InvoiceRepository;
 
 import java.util.List;
 import java.util.Optional;
