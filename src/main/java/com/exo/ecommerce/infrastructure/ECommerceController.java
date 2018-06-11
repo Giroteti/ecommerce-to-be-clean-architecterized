@@ -1,5 +1,6 @@
 package com.exo.ecommerce.infrastructure;
 
+import com.exo.ecommerce.infrastructure.http.*;
 import com.exo.ecommerce.usecases.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

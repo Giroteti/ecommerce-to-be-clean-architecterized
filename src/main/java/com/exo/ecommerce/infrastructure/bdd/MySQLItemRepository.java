@@ -1,4 +1,4 @@
-package com.exo.ecommerce.infrastructure;
+package com.exo.ecommerce.infrastructure.bdd;
 
 import com.exo.ecommerce.domain.item.Item;
 import com.exo.ecommerce.domain.item.ItemRepository;

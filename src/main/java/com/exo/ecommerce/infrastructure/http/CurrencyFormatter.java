@@ -1,4 +1,4 @@
-package com.exo.ecommerce.infrastructure;
+package com.exo.ecommerce.infrastructure.http;
 
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;

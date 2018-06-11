@@ -1,4 +1,4 @@
-package com.exo.ecommerce.infrastructure;
+package com.exo.ecommerce.infrastructure.http;
 
 import com.exo.ecommerce.domain.cart.Cart;
 import org.springframework.http.HttpStatus;
