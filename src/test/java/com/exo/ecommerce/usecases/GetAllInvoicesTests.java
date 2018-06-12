@@ -3,6 +3,7 @@ package com.exo.ecommerce.usecases;
 import com.exo.ecommerce.FastTests;
 import com.exo.ecommerce.domain.invoice.Invoice;
 import com.exo.ecommerce.domain.invoice.InvoiceRepository;
+import com.exo.ecommerce.usecases.getallinvoices.GetAllInvoices;
 import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;

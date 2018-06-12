@@ -5,6 +5,9 @@ import com.exo.ecommerce.domain.cart.Cart;
 import com.exo.ecommerce.domain.cart.CartRepository;
 import com.exo.ecommerce.domain.item.Item;
 import com.exo.ecommerce.domain.item.ItemRepository;
+import com.exo.ecommerce.usecases.additemtocart.AddItemToCart;
+import com.exo.ecommerce.usecases.additemtocart.UnavailableItemExeption;
+import com.exo.ecommerce.usecases.additemtocart.UnknownItemException;
 import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
@@ -30,7 +33,7 @@ public class AddItemCartTests extends TestCase{
 
     @Test
     @Category(FastTests.class)
-    public void should_add_available_item_to_cart() {
+    public void should_add_available_item_to_cart() throws UnavailableItemExeption, UnknownItemException {
         // given
         Long itemId = 1L;
         Item returnedItem = new Item(itemId, "Item 1", "Desc 1", 1, (float) 10.0);
@@ -55,9 +58,9 @@ public class AddItemCartTests extends TestCase{
         assertEquals(returnedCart, outputCart);
     }
 
-    @Test
+    @Test(expected = UnavailableItemExeption.class)
     @Category(FastTests.class)
-    public void should_not_add_exhausted_item_to_cart() {
+    public void should_not_add_exhausted_item_to_cart() throws UnavailableItemExeption, UnknownItemException {
         // given
         Long itemId = 1L;
         Item returnedItem = new Item(itemId, "Item 1", "Desc 1", 0, (float) 10.0);
@@ -69,14 +72,11 @@ public class AddItemCartTests extends TestCase{
 
         // when
         Cart output = underTest.handle(itemId);
-
-        // then
-        assertNull(output);
     }
 
-    @Test
+    @Test(expected = UnknownItemException.class)
     @Category(FastTests.class)
-    public void should_not_add_unknown_item_to_cart() {
+    public void should_not_add_unknown_item_to_cart() throws UnavailableItemExeption, UnknownItemException {
         // given
         Long itemId = 1L;
         Item returnedItem = new Item(itemId, "Item 1", "Desc 1", 0, (float) 10.0);

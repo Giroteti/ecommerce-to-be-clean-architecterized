@@ -7,50 +7,50 @@
         http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
 
-    <bean id="xmlMySQLItemRepository" class="com.exo.ecommerce.infrastructure.bdd.MySQLItemRepository">
+    <bean id="xmlMySQLItemRepository" class="com.exo.ecommerce.infrastructure.bdd.item.MySQLItemRepository">
         <constructor-arg name="crudRepository" ref="itemCRUDRepository"/>
     </bean>
 
-    <bean id="xmlMySQLCartRepository" class="com.exo.ecommerce.infrastructure.bdd.MySQLCartRepository">
+    <bean id="xmlMySQLCartRepository" class="com.exo.ecommerce.infrastructure.bdd.cart.MySQLCartRepository">
         <constructor-arg name="crudRepository" ref="cartCRUDRepository"/>
     </bean>
 
-    <bean id="xmlMySQLInvoiceRepository" class="com.exo.ecommerce.infrastructure.bdd.MySQLInvoiceRepository">
+    <bean id="xmlMySQLInvoiceRepository" class="com.exo.ecommerce.infrastructure.bdd.invoice.MySQLInvoiceRepository">
         <constructor-arg name="crudRepository" ref="invoiceCRUDRepository"/>
     </bean>
 
-    <bean id="xmlAddItemToCart" class="com.exo.ecommerce.usecases.AddItemToCart">
+    <bean id="xmlAddItemToCart" class="com.exo.ecommerce.usecases.additemtocart.AddItemToCart">
         <constructor-arg name="itemRepository" ref="xmlMySQLItemRepository"/>
         <constructor-arg name="cartRepository" ref="xmlMySQLCartRepository"/>
     </bean>
 
-    <bean id="xmlCheckOut" class="com.exo.ecommerce.usecases.CheckOut">
+    <bean id="xmlCheckOut" class="com.exo.ecommerce.usecases.checkout.CheckOut">
         <constructor-arg name="cartRepository" ref="xmlMySQLCartRepository"/>
         <constructor-arg name="invoiceRepository" ref="xmlMySQLInvoiceRepository"/>
     </bean>
 
-    <bean id="xmlGetCurrentCart" class="com.exo.ecommerce.usecases.GetCurrentCart">
+    <bean id="xmlGetCurrentCart" class="com.exo.ecommerce.usecases.getcurrentcart.GetCurrentCart">
         <constructor-arg name="cartRepository" ref="xmlMySQLCartRepository"/>
     </bean>
 
-    <bean id="xmlGetAllInvoices" class="com.exo.ecommerce.usecases.GetAllInvoices">
+    <bean id="xmlGetAllInvoices" class="com.exo.ecommerce.usecases.getallinvoices.GetAllInvoices">
         <constructor-arg name="invoiceRepository" ref="xmlMySQLInvoiceRepository"/>
     </bean>
 
-    <bean id="xmlGetInvoice" class="com.exo.ecommerce.usecases.GetInvoice">
+    <bean id="xmlGetInvoice" class="com.exo.ecommerce.usecases.getinvoice.GetInvoice">
         <constructor-arg name="invoiceRepository" ref="xmlMySQLInvoiceRepository"/>
     </bean>
 
-    <bean id="xmlGetAllItems" class="com.exo.ecommerce.usecases.GetAllItems">
+    <bean id="xmlGetAllItems" class="com.exo.ecommerce.usecases.getallitems.GetAllItems">
         <constructor-arg name="itemRepository" ref="xmlMySQLItemRepository"/>
     </bean>
 
 
-    <bean id="xmlAddItemPresenter" class="com.exo.ecommerce.infrastructure.http.AddItemPresenter"/>
-    <bean id="xmlCheckOutPresenter" class="com.exo.ecommerce.infrastructure.http.CheckOutPresenter"/>
-    <bean id="xmlCurrentCartPresenter" class="com.exo.ecommerce.infrastructure.http.CurrentCartPresenter"/>
-    <bean id="xmlInvoicesPresenter" class="com.exo.ecommerce.infrastructure.http.InvoicesPresenter"/>
-    <bean id="xmlInvoicePresenter" class="com.exo.ecommerce.infrastructure.http.InvoicePresenter"/>
-    <bean id="xmlItemsPresenter" class="com.exo.ecommerce.infrastructure.http.ItemsPresenter"/>
+    <bean id="xmlAddItemPresenter" class="com.exo.ecommerce.infrastructure.http.presentation.additemtocart.AddItemToCartPresenter"/>
+    <bean id="xmlCheckOutPresenter" class="com.exo.ecommerce.infrastructure.http.presentation.checkout.CheckOutPresenter"/>
+    <bean id="xmlCurrentCartPresenter" class="com.exo.ecommerce.infrastructure.http.presentation.getcurrentcart.CurrentCartPresenter"/>
+    <bean id="xmlInvoicesPresenter" class="com.exo.ecommerce.infrastructure.http.presentation.getallinvoices.InvoicesPresenter"/>
+    <bean id="xmlInvoicePresenter" class="com.exo.ecommerce.infrastructure.http.presentation.getinvoice.InvoicePresenter"/>
+    <bean id="xmlItemsPresenter" class="com.exo.ecommerce.infrastructure.http.presentation.getallitems.ItemsPresenter"/>
 
 </beans>

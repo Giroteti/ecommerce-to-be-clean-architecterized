@@ -3,6 +3,8 @@ package com.exo.ecommerce.usecases;
 import com.exo.ecommerce.FastTests;
 import com.exo.ecommerce.domain.cart.Cart;
 import com.exo.ecommerce.domain.cart.CartRepository;
+import com.exo.ecommerce.usecases.getcurrentcart.GetCurrentCart;
+import com.exo.ecommerce.usecases.getcurrentcart.NoCurrentCartException;
 import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
@@ -24,7 +26,7 @@ public class GetCurrentCartTests extends TestCase {
 
     @Test
     @Category(FastTests.class)
-    public void should_return_cart_when_available() {
+    public void should_return_cart_when_available() throws NoCurrentCartException {
         // given
         Cart returnedCart = new Cart();
         given(
@@ -38,17 +40,14 @@ public class GetCurrentCartTests extends TestCase {
         assertEquals(returnedCart, output);
     }
 
-    @Test
+    @Test(expected = NoCurrentCartException.class)
     @Category(FastTests.class)
-    public void should_return_null_no_cart() {
+    public void should_return_null_no_cart() throws NoCurrentCartException {
         given(
                 cartRepository.fetchCurrentCart()
         ).willReturn(Optional.empty());
 
         // when
         Cart output = underTest.handle();
-
-        // then
-        assertNull(output);
     }
 }

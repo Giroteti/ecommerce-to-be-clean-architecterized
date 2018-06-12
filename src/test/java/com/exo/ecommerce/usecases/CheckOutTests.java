@@ -6,6 +6,8 @@ import com.exo.ecommerce.domain.cart.CartRepository;
 import com.exo.ecommerce.domain.invoice.Invoice;
 import com.exo.ecommerce.domain.invoice.InvoiceRepository;
 import com.exo.ecommerce.domain.item.Item;
+import com.exo.ecommerce.usecases.checkout.CheckOut;
+import com.exo.ecommerce.usecases.checkout.NothingToCheckOutException;
 import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;

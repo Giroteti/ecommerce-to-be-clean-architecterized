@@ -3,6 +3,8 @@ package com.exo.ecommerce.usecases;
 import com.exo.ecommerce.FastTests;
 import com.exo.ecommerce.domain.invoice.Invoice;
 import com.exo.ecommerce.domain.invoice.InvoiceRepository;
+import com.exo.ecommerce.usecases.getinvoice.GetInvoice;
+import com.exo.ecommerce.usecases.getinvoice.InvoiceNotFoundException;
 import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
@@ -24,7 +26,7 @@ public class GetInvoiceTests extends TestCase {
 
     @Test
     @Category(FastTests.class)
-    public void should_return_invoices_when_available() {
+    public void should_return_invoices_when_available() throws InvoiceNotFoundException {
         // given
         Invoice returnedInvoice = new Invoice();
         given(invoiceRepository.findById(1L)).willReturn(Optional.of(returnedInvoice));
@@ -36,13 +38,10 @@ public class GetInvoiceTests extends TestCase {
         assertEquals(returnedInvoice, output);
     }
 
-    @Test
+    @Test(expected = InvoiceNotFoundException.class)
     @Category(FastTests.class)
-    public void should_return_null_when_no_invoice_available() {
+    public void should_throw_exception_when_no_invoice_available() throws InvoiceNotFoundException {
         // when
         Invoice output = underTest.handle(1L);
-
-        // then
-        assertNull(output);
     }
 }
