@@ -15,11 +15,14 @@ public class MySQLCartRepository implements CartRepository {
 
     @Override
     public Optional<Cart> fetchCurrentCart() {
-        return this.crudRepository.findTopByCheckedOutOrderByIdDesc(false);
+        return this.crudRepository.findTopByCheckedOutOrderByIdDesc(false)
+                .map(com.exo.ecommerce.infrastructure.bdd.cart.Cart::toDomainEntity);
     }
 
     @Override
     public Cart save(Cart cart) {
-        return this.crudRepository.save(cart);
+        return this.crudRepository.save(
+                com.exo.ecommerce.infrastructure.bdd.cart.Cart.fromDomainEntity(cart)
+        ).toDomainEntity();
     }
 }

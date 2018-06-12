@@ -19,6 +19,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Optional;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 
@@ -40,6 +41,8 @@ public class CheckOutTests extends TestCase {
         returnedCart.addItem(itemToCheckOut);
         returnedCart.addItem(itemToCheckOut);
         given(cartRepository.fetchCurrentCart()).willReturn(Optional.of(returnedCart));
+        Invoice returnedInvoice = new Invoice();
+        given(invoiceRepository.save(any(Invoice.class))).willReturn(returnedInvoice);
 
         // when
         Invoice output = underTest.handle();
@@ -52,7 +55,7 @@ public class CheckOutTests extends TestCase {
         assertNotNull(invoiceCaptor.getValue().getDate());
         then(cartRepository).should().save(returnedCart);
         assertTrue(returnedCart.getCheckedOut());
-        assertEquals(invoiceCaptor.getValue(), output);
+        assertEquals(returnedInvoice, output);
     }
 
     @Test(expected = NothingToCheckOutException.class)

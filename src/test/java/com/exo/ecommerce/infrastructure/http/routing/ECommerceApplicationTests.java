@@ -1,14 +1,15 @@
 package com.exo.ecommerce.infrastructure.http.routing;
 
 import com.exo.ecommerce.SlowTests;
-import com.exo.ecommerce.domain.cart.Cart;
-import com.exo.ecommerce.domain.invoice.Invoice;
-import com.exo.ecommerce.domain.item.Item;
+import com.exo.ecommerce.infrastructure.bdd.cart.Cart;
 import com.exo.ecommerce.infrastructure.bdd.cart.CartCRUDRepository;
+import com.exo.ecommerce.infrastructure.bdd.invoice.Invoice;
 import com.exo.ecommerce.infrastructure.bdd.invoice.InvoiceCRUDRepository;
+import com.exo.ecommerce.infrastructure.bdd.item.Item;
 import com.exo.ecommerce.infrastructure.bdd.item.ItemCRUDRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;

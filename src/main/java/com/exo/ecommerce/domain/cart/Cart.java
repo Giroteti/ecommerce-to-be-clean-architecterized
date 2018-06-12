@@ -15,6 +15,12 @@ public class Cart {
         checkedOut = false;
     }
 
+    public Cart(Long id, List<Item> items, Boolean checkedOut) {
+        this.id = id;
+        this.items = items;
+        this.checkedOut = checkedOut;
+    }
+
     public Long getId() {
         return id;
     }

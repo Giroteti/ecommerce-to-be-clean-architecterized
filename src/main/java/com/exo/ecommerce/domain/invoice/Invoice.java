@@ -18,6 +18,12 @@ public class Invoice {
         this.date = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
     }
 
+    public Invoice(Long id, String date, Cart cart) {
+        this.id = id;
+        this.date = date;
+        this.cart = cart;
+    }
+
     public Long getId() {
         return id;
     }

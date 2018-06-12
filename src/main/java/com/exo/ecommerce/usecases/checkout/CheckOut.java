@@ -23,7 +23,7 @@ public class CheckOut {
             Cart cart = currentCart.get();
             Invoice invoice = new Invoice(cart);
             cart.setCheckedOut(true);
-            invoiceRepository.save(invoice);
+            invoice = invoiceRepository.save(invoice);
             cartRepository.save(cart);
             return invoice;
         } else {
