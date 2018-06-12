@@ -31,7 +31,7 @@ public class CheckOutTests extends TestCase {
 
     @Test
     @Category(FastTests.class)
-    public void should_check_out_existing_non_empty_cart() {
+    public void should_check_out_existing_non_empty_cart() throws NothingToCheckOutException {
         // given
         Cart returnedCart = new Cart();
         Item itemToCheckOut = new Item(1L, "Item 1", "Desc 1", 1, (float) 10.0);
@@ -53,32 +53,25 @@ public class CheckOutTests extends TestCase {
         assertEquals(invoiceCaptor.getValue(), output);
     }
 
-    @Test
+    @Test(expected = NothingToCheckOutException.class)
     @Category(FastTests.class)
-    public void should_not_check_out_empty_cart()
-    {
+    public void should_not_check_out_empty_cart() throws NothingToCheckOutException {
         // given
         Cart returnedCart = new Cart();
         given(cartRepository.fetchCurrentCart()).willReturn(Optional.of(returnedCart));
 
-        // when
-        Invoice output = underTest.handle();
 
-        // then
-        assertNull(output);
+        // when
+        underTest.handle();
     }
 
-    @Test
+    @Test(expected = NothingToCheckOutException.class)
     @Category(FastTests.class)
-    public void should_not_check_out_uninitialized_cart()
-    {
+    public void should_not_check_out_uninitialized_cart() throws NothingToCheckOutException {
         // given
         given(cartRepository.fetchCurrentCart()).willReturn(Optional.empty());
 
         // when
         Invoice output = underTest.handle();
-
-        // then
-        assertNull(output);
     }
 }

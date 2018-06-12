@@ -56,7 +56,7 @@ public class ECommerceController {
     }
 
     @RequestMapping(path = "/check-out", produces = "application/json; charset=UTF-8")
-    public ResponseEntity checkOutCart() {
+    public ResponseEntity checkOutCart() throws NothingToCheckOutException {
 
         return checkOutPresenter.present(checkOut.handle());
     }

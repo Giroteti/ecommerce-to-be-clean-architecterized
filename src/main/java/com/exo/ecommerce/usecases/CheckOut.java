@@ -17,8 +17,7 @@ public class CheckOut {
         this.invoiceRepository = invoiceRepository;
     }
 
-    public Invoice handle()
-    {
+    public Invoice handle() throws NothingToCheckOutException {
         Optional<Cart> currentCart = cartRepository.fetchCurrentCart();
         if (currentCart.isPresent() && !currentCart.get().getItems().isEmpty()) {
             Cart cart = currentCart.get();
@@ -28,7 +27,7 @@ public class CheckOut {
             cartRepository.save(cart);
             return invoice;
         } else {
-            return null;
+            throw new NothingToCheckOutException();
         }
     }
 }
