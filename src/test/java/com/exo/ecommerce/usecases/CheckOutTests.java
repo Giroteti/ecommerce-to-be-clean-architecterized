@@ -8,7 +8,6 @@ import com.exo.ecommerce.domain.invoice.InvoiceRepository;
 import com.exo.ecommerce.domain.item.Item;
 import com.exo.ecommerce.usecases.checkout.CheckOut;
 import com.exo.ecommerce.usecases.checkout.NothingToCheckOutException;
-import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
@@ -19,12 +18,13 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Optional;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 
 @RunWith(MockitoJUnitRunner.class)
-public class CheckOutTests extends TestCase {
+public class CheckOutTests {
     @Mock
     private CartRepository cartRepository;
     @Mock
@@ -37,7 +37,7 @@ public class CheckOutTests extends TestCase {
     public void should_check_out_existing_non_empty_cart() throws NothingToCheckOutException {
         // given
         Cart returnedCart = new Cart();
-        Item itemToCheckOut = new Item(1L, "Item 1", "Desc 1", 1, (float) 10.0);
+        Item itemToCheckOut = new Item(1L, "Item 1", "Desc 1", 1, 10d);
         returnedCart.addItem(itemToCheckOut);
         returnedCart.addItem(itemToCheckOut);
         given(cartRepository.fetchCurrentCart()).willReturn(Optional.of(returnedCart));
@@ -50,12 +50,12 @@ public class CheckOutTests extends TestCase {
         // then
         ArgumentCaptor<Invoice> invoiceCaptor = ArgumentCaptor.forClass(Invoice.class);
         then(invoiceRepository).should().save(invoiceCaptor.capture());
-        assertEquals((float) 20.0, invoiceCaptor.getValue().calculateTotalPrice());
-        assertEquals(returnedCart, invoiceCaptor.getValue().getCart());
-        assertNotNull(invoiceCaptor.getValue().getDate());
+        assertThat(invoiceCaptor.getValue().calculateTotalPrice()).isEqualTo(20d);
+        assertThat(invoiceCaptor.getValue().getCart()).isEqualTo(returnedCart);
+        assertThat(invoiceCaptor.getValue().getDate()).isNotNull();
         then(cartRepository).should().save(returnedCart);
-        assertTrue(returnedCart.getCheckedOut());
-        assertEquals(returnedInvoice, output);
+        assertThat(returnedCart.getCheckedOut()).isTrue();
+        assertThat(output).isEqualTo(returnedInvoice);
     }
 
     @Test(expected = NothingToCheckOutException.class)
@@ -77,6 +77,6 @@ public class CheckOutTests extends TestCase {
         given(cartRepository.fetchCurrentCart()).willReturn(Optional.empty());
 
         // when
-        Invoice output = underTest.handle();
+        underTest.handle();
     }
 }

@@ -15,7 +15,7 @@ To build and run the sample from a fresh clone of this repo:
 
 ## Build and run the sample
 
-1. `mvnw package`
+1. `./mvnw package`
 3. `java -jar target/ECommerce-0.0.1-SNAPSHOT.jar`
 
 ## Tests
@@ -25,17 +25,17 @@ Alias scripts are available to ease executing tests:
 
 **All tests**
 ```
-./test.sh
+./tests.sh
 ```
 
 **Unit tests only**
 ```
-./test.sh -u
+./tests.sh -u
 ```
 
 **Integration tests only**
 ```
-./test.sh -i
+./tests.sh -i
 ```
 
 ## Integration tests

@@ -4,17 +4,15 @@ import com.exo.ecommerce.domain.invoice.Invoice;
 import com.exo.ecommerce.infrastructure.http.presentation.InvoiceResponse;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 @Component
 public class InvoicesPresenter {
-    public ArrayList<InvoiceResponse> present(List<Invoice> invoices)
-    {
-        ArrayList<InvoiceResponse> response = new ArrayList<InvoiceResponse>();
-        for (Invoice invoice : invoices) {
-            response.add(new InvoiceResponse(invoice));
-        }
-        return response;
+    public List<InvoiceResponse> present(List<Invoice> invoices) {
+        return invoices.stream()
+                .map(InvoiceResponse::new)
+                .collect(toList());
     }
 }

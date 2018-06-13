@@ -8,8 +8,7 @@ import java.util.Locale;
 public class CurrencyFormatter {
     private static DecimalFormat numberFormatInstance = null;
 
-    public static String formatCurrency(float amount)
-    {
+    public static String formatCurrency(double amount) {
         if (numberFormatInstance == null) {
             DecimalFormat numberFormat = (DecimalFormat) DecimalFormat.getCurrencyInstance(Locale.FRANCE);
             numberFormat.applyPattern("###,###.## ¤");

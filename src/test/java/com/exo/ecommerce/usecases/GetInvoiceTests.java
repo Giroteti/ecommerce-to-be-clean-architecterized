@@ -5,7 +5,6 @@ import com.exo.ecommerce.domain.invoice.Invoice;
 import com.exo.ecommerce.domain.invoice.InvoiceRepository;
 import com.exo.ecommerce.usecases.getinvoice.GetInvoice;
 import com.exo.ecommerce.usecases.getinvoice.InvoiceNotFoundException;
-import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
@@ -15,10 +14,11 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Optional;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 
 @RunWith(MockitoJUnitRunner.class)
-public class GetInvoiceTests extends TestCase {
+public class GetInvoiceTests {
     @Mock
     private InvoiceRepository invoiceRepository;
     @InjectMocks
@@ -35,13 +35,13 @@ public class GetInvoiceTests extends TestCase {
         Invoice output = underTest.handle(1L);
 
         // then
-        assertEquals(returnedInvoice, output);
+        assertThat(output).isEqualTo(returnedInvoice);
     }
 
     @Test(expected = InvoiceNotFoundException.class)
     @Category(FastTests.class)
     public void should_throw_exception_when_no_invoice_available() throws InvoiceNotFoundException {
         // when
-        Invoice output = underTest.handle(1L);
+        underTest.handle(1L);
     }
 }

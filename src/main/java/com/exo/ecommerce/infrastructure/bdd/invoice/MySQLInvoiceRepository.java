@@ -10,7 +10,7 @@ import java.util.Optional;
 
 @Component
 public class MySQLInvoiceRepository implements InvoiceRepository {
-    private InvoiceCRUDRepository crudRepository;
+    private final InvoiceCRUDRepository crudRepository;
 
     public MySQLInvoiceRepository(InvoiceCRUDRepository crudRepository) {
         this.crudRepository = crudRepository;
