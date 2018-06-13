@@ -1,4 +1,4 @@
-package com.exo.ecommerce.infrastructure.http.routing;
+package com.exo.ecommerce.infrastructure;
 
 import com.exo.ecommerce.infrastructure.bdd.cart.MySQLCartRepository;
 import com.exo.ecommerce.infrastructure.bdd.invoice.MySQLInvoiceRepository;
