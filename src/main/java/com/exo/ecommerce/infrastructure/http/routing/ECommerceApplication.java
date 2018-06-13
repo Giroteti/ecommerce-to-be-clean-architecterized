@@ -17,13 +17,11 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-@ComponentScan("com.exo.ecommerce")
 @EnableJpaRepositories(basePackages = {"com.exo.ecommerce.infrastructure.bdd"})
-@EntityScan("com.exo.ecommerce")
-@SpringBootApplication
+@EntityScan("com.exo.ecommerce.infrastructure.bdd")
+@SpringBootApplication(scanBasePackages = {"com.exo.ecommerce"})
 public class ECommerceApplication extends SpringBootServletInitializer {
 
     private static final Logger log = LoggerFactory.getLogger(ECommerceApplication.class);
