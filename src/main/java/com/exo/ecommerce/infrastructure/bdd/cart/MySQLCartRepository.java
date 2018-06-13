@@ -2,9 +2,11 @@ package com.exo.ecommerce.infrastructure.bdd.cart;
 
 import com.exo.ecommerce.domain.cart.Cart;
 import com.exo.ecommerce.domain.cart.CartRepository;
+import org.springframework.stereotype.Component;
 
 import java.util.Optional;
 
+@Component
 public class MySQLCartRepository implements CartRepository {
 
     private CartCRUDRepository crudRepository;

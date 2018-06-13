@@ -2,11 +2,13 @@ package com.exo.ecommerce.infrastructure.bdd.item;
 
 import com.exo.ecommerce.domain.item.Item;
 import com.exo.ecommerce.domain.item.ItemRepository;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Component
 public class MySQLItemRepository implements ItemRepository {
 
     ItemCRUDRepository crudRepository;

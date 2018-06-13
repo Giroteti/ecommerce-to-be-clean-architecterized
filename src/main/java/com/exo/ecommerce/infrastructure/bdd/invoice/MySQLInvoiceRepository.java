@@ -2,11 +2,13 @@ package com.exo.ecommerce.infrastructure.bdd.invoice;
 
 import com.exo.ecommerce.domain.invoice.Invoice;
 import com.exo.ecommerce.domain.invoice.InvoiceRepository;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+@Component
 public class MySQLInvoiceRepository implements InvoiceRepository {
     private InvoiceCRUDRepository crudRepository;
 
