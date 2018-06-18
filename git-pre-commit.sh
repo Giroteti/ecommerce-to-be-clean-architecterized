@@ -1,4 +1,6 @@
-./mvnw test
+#!/usr/bin/env bash
+
+./mvnw clean test
 if [ $? -eq 0 ]
 then
     echo "OK"

@@ -1,8 +1,6 @@
 package com.exo.ecommerce.infrastructure.bdd.item;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
@@ -13,9 +11,9 @@ public class Item {
     private String name;
     private String description;
     private Integer remainingInStock;
-    private Float price;
+    private Double price;
 
-    public Item(Long id, String name, String description, Integer remainingInStock, Float price) {
+    public Item(Long id, String name, String description, Integer remainingInStock, Double price) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -36,7 +34,7 @@ public class Item {
         );
     }
 
-    static public Item fromDomainEntity(com.exo.ecommerce.domain.item.Item item) {
+    public static Item fromDomainEntity(com.exo.ecommerce.domain.item.Item item) {
         return new Item(
                 item.getId(),
                 item.getName(),

@@ -36,8 +36,7 @@ public class Invoice {
         return cart;
     }
 
-    public float calculateTotalPrice()
-    {
+    public double calculateTotalPrice() {
         return this.cart.calculateTotalPrice();
     }
 

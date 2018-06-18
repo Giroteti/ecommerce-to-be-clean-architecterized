@@ -5,7 +5,6 @@ import com.exo.ecommerce.domain.cart.Cart;
 import com.exo.ecommerce.domain.cart.CartRepository;
 import com.exo.ecommerce.usecases.getcurrentcart.GetCurrentCart;
 import com.exo.ecommerce.usecases.getcurrentcart.NoCurrentCartException;
-import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
@@ -15,10 +14,11 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Optional;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 
 @RunWith(MockitoJUnitRunner.class)
-public class GetCurrentCartTests extends TestCase {
+public class GetCurrentCartTests {
     @Mock
     private CartRepository cartRepository;
     @InjectMocks
@@ -37,7 +37,7 @@ public class GetCurrentCartTests extends TestCase {
         Cart output = underTest.handle();
 
         // then
-        assertEquals(returnedCart, output);
+        assertThat(output).isEqualTo(returnedCart);
     }
 
     @Test(expected = NoCurrentCartException.class)
@@ -48,6 +48,6 @@ public class GetCurrentCartTests extends TestCase {
         ).willReturn(Optional.empty());
 
         // when
-        Cart output = underTest.handle();
+        underTest.handle();
     }
 }

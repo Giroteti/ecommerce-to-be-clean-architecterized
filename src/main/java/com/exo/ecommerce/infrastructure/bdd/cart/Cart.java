@@ -6,6 +6,8 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.util.stream.Collectors.toList;
+
 @Entity
 public class Cart {
     @Id
@@ -23,15 +25,15 @@ public class Cart {
 
     public Cart() {
         this.id = null;
-        this.items = new ArrayList<Item>();
+        this.items = new ArrayList<>();
         checkedOut = false;
     }
 
     public com.exo.ecommerce.domain.cart.Cart toDomainEntity() {
-        ArrayList<com.exo.ecommerce.domain.item.Item> domainItems = new ArrayList<>();
-        for (Item item : items) {
-            domainItems.add(item.toDomainEntity());
-        }
+        List<com.exo.ecommerce.domain.item.Item> domainItems = items.stream()
+                .map(Item::toDomainEntity)
+                .collect(toList());
+
         return new com.exo.ecommerce.domain.cart.Cart(
                 this.id,
                 domainItems,
@@ -39,11 +41,11 @@ public class Cart {
         );
     }
 
-    static public Cart fromDomainEntity(com.exo.ecommerce.domain.cart.Cart cart) {
-        ArrayList<Item> items = new ArrayList<>();
-        for (com.exo.ecommerce.domain.item.Item item : cart.getItems()) {
-            items.add(Item.fromDomainEntity(item));
-        }
+    public static Cart fromDomainEntity(com.exo.ecommerce.domain.cart.Cart cart) {
+        List<Item> items = cart.getItems().stream()
+                .map(Item::fromDomainEntity)
+                .collect(toList());
+
         return new Cart(
                 cart.getId(),
                 items,

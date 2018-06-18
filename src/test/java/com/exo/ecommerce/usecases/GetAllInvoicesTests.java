@@ -4,7 +4,6 @@ import com.exo.ecommerce.FastTests;
 import com.exo.ecommerce.domain.invoice.Invoice;
 import com.exo.ecommerce.domain.invoice.InvoiceRepository;
 import com.exo.ecommerce.usecases.getallinvoices.GetAllInvoices;
-import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
@@ -15,10 +14,11 @@ import org.mockito.junit.MockitoJUnitRunner;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 
 @RunWith(MockitoJUnitRunner.class)
-public class GetAllInvoicesTests extends TestCase {
+public class GetAllInvoicesTests {
     @Mock
     private InvoiceRepository invoiceRepository;
     @InjectMocks
@@ -26,15 +26,14 @@ public class GetAllInvoicesTests extends TestCase {
 
     @Test
     @Category(FastTests.class)
-    public void should_return_all_invoices()
-    {
+    public void should_return_all_invoices() {
         ArrayList<Invoice> returnedList = new ArrayList<Invoice>();
         given(invoiceRepository.findAll()).willReturn(returnedList);
         // when
         List<Invoice> output = underTest.handle();
 
         // then
-        assertEquals(returnedList, output);
+        assertThat(output).isEqualTo(returnedList);
     }
 
 }

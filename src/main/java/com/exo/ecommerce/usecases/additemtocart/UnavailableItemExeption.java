@@ -1,4 +1,4 @@
 package com.exo.ecommerce.usecases.additemtocart;
 
-public class UnavailableItemExeption extends Throwable {
+public class UnavailableItemExeption extends RuntimeException {
 }

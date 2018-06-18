@@ -20,78 +20,80 @@ import com.exo.ecommerce.usecases.getcurrentcart.GetCurrentCart;
 import com.exo.ecommerce.usecases.getcurrentcart.NoCurrentCartException;
 import com.exo.ecommerce.usecases.getinvoice.GetInvoice;
 import com.exo.ecommerce.usecases.getinvoice.InvoiceNotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
+import java.util.List;
 
-@Controller
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
+
+@RestController
 public class ECommerceController {
 
-    @Autowired
-    AddItemToCart addItemToCart;
-    @Autowired
-    AddItemToCartPresenter addItemToCartPresenter;
+    private final AddItemToCart addItemToCart;
+    private final AddItemToCartPresenter addItemToCartPresenter;
 
-    @Autowired
-    CheckOut checkOut;
-    @Autowired
-    CheckOutPresenter checkOutPresenter;
+    private final CheckOut checkOut;
+    private final CheckOutPresenter checkOutPresenter;
 
-    @Autowired
-    GetCurrentCart getCurrentCart;
-    @Autowired
-    CurrentCartPresenter currentCartPresenter;
+    private final GetCurrentCart getCurrentCart;
+    private final CurrentCartPresenter currentCartPresenter;
 
-    @Autowired
-    GetAllInvoices getAllInvoices;
-    @Autowired
-    InvoicesPresenter invoicesPresenter;
+    private final GetAllInvoices getAllInvoices;
+    private final InvoicesPresenter invoicesPresenter;
 
-    @Autowired
-    GetInvoice getInvoice;
-    @Autowired
-    InvoicePresenter invoicePresenter;
+    private final GetInvoice getInvoice;
+    private final InvoicePresenter invoicePresenter;
 
-    @Autowired
-    GetAllItems getAllItems;
-    @Autowired
-    ItemsPresenter itemsPresenter;
+    private final GetAllItems getAllItems;
+    private final ItemsPresenter itemsPresenter;
 
-    @RequestMapping(path = "/items", produces = "application/json; charset=UTF-8")
-    @ResponseBody
-    public ArrayList<ItemResponse> allItems() {
+    public ECommerceController(GetAllInvoices getAllInvoices, AddItemToCart addItemToCart, AddItemToCartPresenter addItemToCartPresenter, CheckOut checkOut, CheckOutPresenter checkOutPresenter, GetCurrentCart getCurrentCart, CurrentCartPresenter currentCartPresenter, InvoicesPresenter invoicesPresenter, GetInvoice getInvoice, InvoicePresenter invoicePresenter, GetAllItems getAllItems, ItemsPresenter itemsPresenter) {
+        this.getAllInvoices = getAllInvoices;
+        this.addItemToCart = addItemToCart;
+        this.addItemToCartPresenter = addItemToCartPresenter;
+        this.checkOut = checkOut;
+        this.checkOutPresenter = checkOutPresenter;
+        this.getCurrentCart = getCurrentCart;
+        this.currentCartPresenter = currentCartPresenter;
+        this.invoicesPresenter = invoicesPresenter;
+        this.getInvoice = getInvoice;
+        this.invoicePresenter = invoicePresenter;
+        this.getAllItems = getAllItems;
+        this.itemsPresenter = itemsPresenter;
+    }
+
+    @GetMapping(path = "/items", produces = APPLICATION_JSON_VALUE)
+    public List<ItemResponse> allItems() {
         return itemsPresenter.present(getAllItems.handle());
     }
 
-    @RequestMapping(path = "/add-item", produces = "application/json; charset=UTF-8")
+    @RequestMapping(method = {GET, POST}, path = "/add-item", produces = APPLICATION_JSON_VALUE)
     public ResponseEntity addItemToCart(@RequestParam("id") Long itemId) throws UnavailableItemExeption, UnknownItemException {
         return addItemToCartPresenter.present(addItemToCart.handle(itemId), itemId);
     }
 
-    @RequestMapping(path = "/check-out", produces = "application/json; charset=UTF-8")
+    @GetMapping(path = "/check-out", produces = APPLICATION_JSON_VALUE)
     public ResponseEntity checkOutCart() throws NothingToCheckOutException {
-
         return checkOutPresenter.present(checkOut.handle());
     }
 
-    @RequestMapping(path = "/cart", produces = "application/json; charset=UTF-8")
-    @ResponseBody
+    @GetMapping(path = "/cart", produces = APPLICATION_JSON_VALUE)
     public CartResponse currentCart() throws NoCurrentCartException {
         return currentCartPresenter.present(getCurrentCart.handle());
     }
 
-    @RequestMapping(path = "/invoices", produces = "application/json; charset=UTF-8")
-    @ResponseBody
-    public ArrayList<InvoiceResponse> allInvoices() {
+    @GetMapping(path = "/invoices", produces = APPLICATION_JSON_VALUE)
+    public List<InvoiceResponse> allInvoices() {
         return invoicesPresenter.present(getAllInvoices.handle());
     }
 
-    @RequestMapping(path = "/invoice", produces = "application/json; charset=UTF-8")
+    @GetMapping(path = "/invoice", produces = APPLICATION_JSON_VALUE)
     public ResponseEntity invoice(@RequestParam("id") Long invoiceId) throws InvoiceNotFoundException {
         return invoicePresenter.present(getInvoice.handle(invoiceId));
     }
