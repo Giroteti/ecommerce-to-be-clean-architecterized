@@ -11,7 +11,7 @@ public class Cart {
     private Boolean checkedOut;
 
     public Cart() {
-        items = new ArrayList<>();
+        items = new ArrayList<Item>();
         checkedOut = false;
     }
 
@@ -41,10 +41,12 @@ public class Cart {
         this.checkedOut = checkedOut;
     }
 
-    public double calculateTotalPrice() {
-        return this.items.stream()
-                .mapToDouble(Item::getPrice)
-                .sum();
+    public float calculateTotalPrice() {
+        float totalPrice = 0;
+        for (Item item : this.items) {
+            totalPrice += item.getPrice();
+        }
+        return totalPrice;
     }
 
     public void setId(Long id) {

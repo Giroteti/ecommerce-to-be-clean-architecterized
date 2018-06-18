@@ -8,6 +8,7 @@ import com.exo.ecommerce.domain.item.ItemRepository;
 import com.exo.ecommerce.usecases.additemtocart.AddItemToCart;
 import com.exo.ecommerce.usecases.additemtocart.UnavailableItemExeption;
 import com.exo.ecommerce.usecases.additemtocart.UnknownItemException;
+import junit.framework.TestCase;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
@@ -18,12 +19,11 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.Optional;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 
 @RunWith(MockitoJUnitRunner.class)
-public class AddItemCartTests {
+public class AddItemCartTests extends TestCase{
     @Mock
     private ItemRepository itemRepository;
     @Mock
@@ -36,7 +36,7 @@ public class AddItemCartTests {
     public void should_add_available_item_to_cart() throws UnavailableItemExeption, UnknownItemException {
         // given
         Long itemId = 1L;
-        Item returnedItem = new Item(itemId, "Item 1", "Desc 1", 1, 10d);
+        Item returnedItem = new Item(itemId, "Item 1", "Desc 1", 1, (float) 10.0);
         Cart returnedCart = new Cart();
 
         given(itemRepository.findById(itemId)).willReturn(
@@ -46,17 +46,16 @@ public class AddItemCartTests {
         );
         given(cartRepository.fetchCurrentCart()).willReturn(Optional.of(returnedCart));
         given(itemRepository.save(returnedItem)).willReturn(returnedItem);
-
         // when
         Cart outputCart = underTest.handle(itemId);
 
         // then
         ArgumentCaptor<Cart> cartCaptor = ArgumentCaptor.forClass(Cart.class);
         then(cartRepository).should().save(cartCaptor.capture());
-        assertThat(cartCaptor.getValue().getItems().size()).isEqualTo(1);
-        assertThat((long) cartCaptor.getValue().getItems().get(0).getId()).isEqualTo(1L);
-        assertThat((int) returnedItem.getRemainingInStock()).isEqualTo(0);
-        assertThat(outputCart).isEqualTo(returnedCart);
+        assertEquals(1, cartCaptor.getValue().getItems().size());
+        assertEquals(1L, (long) cartCaptor.getValue().getItems().get(0).getId());
+        assertEquals(0, (int) returnedItem.getRemainingInStock());
+        assertEquals(returnedCart, outputCart);
     }
 
     @Test(expected = UnavailableItemExeption.class)
@@ -64,7 +63,7 @@ public class AddItemCartTests {
     public void should_not_add_exhausted_item_to_cart() throws UnavailableItemExeption, UnknownItemException {
         // given
         Long itemId = 1L;
-        Item returnedItem = new Item(itemId, "Item 1", "Desc 1", 0, 10d);
+        Item returnedItem = new Item(itemId, "Item 1", "Desc 1", 0, (float) 10.0);
         given(itemRepository.findById(itemId)).willReturn(
                 Optional.of(
                         returnedItem
@@ -72,7 +71,7 @@ public class AddItemCartTests {
         );
 
         // when
-        underTest.handle(itemId);
+        Cart output = underTest.handle(itemId);
     }
 
     @Test(expected = UnknownItemException.class)
@@ -80,6 +79,7 @@ public class AddItemCartTests {
     public void should_not_add_unknown_item_to_cart() throws UnavailableItemExeption, UnknownItemException {
         // given
         Long itemId = 1L;
+        Item returnedItem = new Item(itemId, "Item 1", "Desc 1", 0, (float) 10.0);
         given(itemRepository.findById(itemId)).willReturn(
                 Optional.empty()
         );
@@ -88,6 +88,6 @@ public class AddItemCartTests {
         Cart output = underTest.handle(itemId);
 
         // then
-        assertThat(output).isNull();
+        assertNull(output);
     }
 }

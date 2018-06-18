@@ -30,7 +30,7 @@ public class Invoice {
         );
     }
 
-    public static Invoice fromDomainEntity(com.exo.ecommerce.domain.invoice.Invoice invoice) {
+    static public Invoice fromDomainEntity(com.exo.ecommerce.domain.invoice.Invoice invoice) {
         return new Invoice(
                 invoice.getId(),
                 invoice.getDate(),

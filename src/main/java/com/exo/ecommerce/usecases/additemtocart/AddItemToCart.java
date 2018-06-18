@@ -9,8 +9,8 @@ import java.util.Optional;
 
 public class AddItemToCart {
 
-    private final ItemRepository itemRepository;
-    private final CartRepository cartRepository;
+    ItemRepository itemRepository;
+    CartRepository cartRepository;
 
     public AddItemToCart(ItemRepository itemRepository, CartRepository cartRepository) {
         this.itemRepository = itemRepository;

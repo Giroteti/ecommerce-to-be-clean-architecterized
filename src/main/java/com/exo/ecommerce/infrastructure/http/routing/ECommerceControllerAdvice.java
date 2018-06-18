@@ -1,5 +1,4 @@
 package com.exo.ecommerce.infrastructure.http.routing;
-
 import com.exo.ecommerce.infrastructure.http.presentation.CartResponse;
 import com.exo.ecommerce.usecases.additemtocart.UnavailableItemExeption;
 import com.exo.ecommerce.usecases.additemtocart.UnknownItemException;
@@ -10,8 +9,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RequestMapping;
 
-@ControllerAdvice
+@ControllerAdvice(assignableTypes = ECommerceController.class)
+@RequestMapping(produces = "application/json; charset=UTF-8")
 public class ECommerceControllerAdvice {
 
     @ExceptionHandler(NothingToCheckOutException.class)

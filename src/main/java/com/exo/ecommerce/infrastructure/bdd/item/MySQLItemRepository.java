@@ -11,7 +11,7 @@ import java.util.Optional;
 @Component
 public class MySQLItemRepository implements ItemRepository {
 
-    private final ItemCRUDRepository crudRepository;
+    ItemCRUDRepository crudRepository;
 
     public MySQLItemRepository(ItemCRUDRepository crudRepository) {
         this.crudRepository = crudRepository;
@@ -29,8 +29,10 @@ public class MySQLItemRepository implements ItemRepository {
 
     @Override
     public List<Item> findAll() {
-        List<Item> items = new ArrayList<>();
-        crudRepository.findAll().forEach(item -> items.add(item.toDomainEntity()));
+        ArrayList<Item> items = new ArrayList<Item>();
+        for (com.exo.ecommerce.infrastructure.bdd.item.Item item : crudRepository.findAll()) {
+            items.add(item.toDomainEntity());
+        }
         return items;
     }
 }

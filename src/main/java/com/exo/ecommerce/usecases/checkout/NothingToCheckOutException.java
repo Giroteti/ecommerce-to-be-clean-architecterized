@@ -1,4 +1,4 @@
 package com.exo.ecommerce.usecases.checkout;
 
-public class NothingToCheckOutException extends RuntimeException {
+public class NothingToCheckOutException extends Throwable {
 }

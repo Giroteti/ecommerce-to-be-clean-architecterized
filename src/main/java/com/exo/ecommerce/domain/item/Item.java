@@ -6,12 +6,11 @@ public class Item {
     private String name;
     private String description;
     private Integer remainingInStock;
-    private Double price;
+    private Float price;
 
-    public Item() {
-    }
+    public Item() {}
 
-    public Item(Long id, String name, String description, Integer remainingInStock, Double price) {
+    public Item(Long id, String name, String description, Integer remainingInStock, Float price) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -35,7 +34,7 @@ public class Item {
         return remainingInStock;
     }
 
-    public Double getPrice() {
+    public Float getPrice() {
         return price;
     }
 

@@ -9,7 +9,7 @@ import java.util.Optional;
 @Component
 public class MySQLCartRepository implements CartRepository {
 
-    private final CartCRUDRepository crudRepository;
+    private CartCRUDRepository crudRepository;
 
     public MySQLCartRepository(CartCRUDRepository crudRepository) {
         this.crudRepository = crudRepository;
