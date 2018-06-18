@@ -52,9 +52,3 @@ Set the git pre-commit hook as following:
 cp pre-commit.sh ./.git/hooks/pre-commit
 chmod 755 ./.git/hooks/pre-commit
 ```
-
-## TODO
-
-- Add test : cart repository
-- Extract test helpers
-- Extract currencyFormatter ?
