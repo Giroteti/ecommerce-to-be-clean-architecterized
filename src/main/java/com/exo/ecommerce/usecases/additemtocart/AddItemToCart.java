@@ -19,14 +19,13 @@ public class AddItemToCart {
 
     public Cart handle(long id) throws UnknownItemException, UnavailableItemExeption {
         Optional<Item> purchasedItem = itemRepository.findById(id);
-
         if (!purchasedItem.isPresent()) {
             throw new UnknownItemException();
-        } else if (purchasedItem.get().getRemainingInStock() <= 0) {
-            throw new UnavailableItemExeption();
-        } else {
-            return purchaseItem(purchasedItem.get());
         }
+        if (purchasedItem.get().getRemainingInStock() <= 0) {
+            throw new UnavailableItemExeption();
+        }
+        return purchaseItem(purchasedItem.get());
     }
 
     private Cart purchaseItem(Item purchasedItem) {

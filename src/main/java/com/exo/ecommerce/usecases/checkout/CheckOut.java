@@ -19,15 +19,14 @@ public class CheckOut {
 
     public Invoice handle() throws NothingToCheckOutException {
         Optional<Cart> currentCart = cartRepository.fetchCurrentCart();
-        if (currentCart.isPresent() && !currentCart.get().getItems().isEmpty()) {
-            Cart cart = currentCart.get();
-            Invoice invoice = new Invoice(cart);
-            cart.setCheckedOut(true);
-            invoice = invoiceRepository.save(invoice);
-            cartRepository.save(cart);
-            return invoice;
-        } else {
+        if (!currentCart.isPresent()|| currentCart.get().getItems().isEmpty()) {
             throw new NothingToCheckOutException();
         }
+        Cart cart = currentCart.get();
+        Invoice invoice = new Invoice(cart);
+        cart.setCheckedOut(true);
+        invoice = invoiceRepository.save(invoice);
+        cartRepository.save(cart);
+        return invoice;
     }
 }
