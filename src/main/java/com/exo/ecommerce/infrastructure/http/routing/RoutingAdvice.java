@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
-public class ECommerceControllerAdvice {
+public class RoutingAdvice {
 
     @ExceptionHandler(NothingToCheckOutException.class)
     public ResponseEntity nothingToCheckOutException(NothingToCheckOutException e) {
